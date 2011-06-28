@@ -1,0 +1,57 @@
+<html>
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+</head>
+
+	<script type="text/javascript">
+		$(function() {
+			// register something to f2's submit event
+			$('#f2').submit(function() {
+				console.log("f2 submitted");
+				return false;
+			});
+
+			/* Disables submit buttons after clicking / submitting the form in a different way
+			   to prevent double submissions.
+			 */
+			function disable_submit_buttons_on_default_action() {
+				$('form').submit(function() {
+					var all_submit_handlers = $(this).data('events').submit;
+					if (all_submit_handlers !== undefined && all_submit_handlers.length == 1) {
+						// only this event handler we're in is registered
+
+						$(this).find('input[type=submit]').attr('disabled', 'disabled');
+					}
+				});
+			}
+
+			disable_submit_buttons_on_default_action();
+	    });
+	</script>
+
+<body>
+
+	<p>
+		The function <tt>disable_submit_buttons_on_default_action</tt> submit buttons after clicking / submitting the form in a different way to prevent double submissions.
+	</p>
+	<p>
+		<tt>#f1</tt> should just disable the submit button and immediately after that submit the form in the standard way (redirect).
+		<tt>#f2</tt> should do only what is written in its custom submit handler (print "f2 submitted").
+		This should work independent from the order of function declaration and event registration.
+	</p>
+
+	<!-- f1, has no custom submit event -->
+	<form id="f1" action="" type="get">
+		<input type="text" name="t" />
+		<input type="submit" name="sub" />
+	</form>
+
+	<!-- f2, has a custom submit event -->
+	<form id="f2" action="" type="get">
+		<input type="text" name="t" />
+		<input type="submit" name="sub" />
+	</form>
+
+</body>
+
+</html>
