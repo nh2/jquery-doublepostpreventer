@@ -1,6 +1,7 @@
 <html>
 <head>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+	<script type="text/javascript" src="jquery.doublepostpreventer.js"></script>
 </head>
 
 	<script type="text/javascript">
@@ -14,18 +15,7 @@
 			/* Disables submit buttons after clicking / submitting the form in a different way
 			   to prevent double submissions.
 			 */
-			function disable_submit_buttons_on_default_action() {
-				$('form').submit(function() {
-					var all_submit_handlers = $(this).data('events').submit;
-					if (all_submit_handlers !== undefined && all_submit_handlers.length == 1) {
-						// only this event handler we're in is registered
-
-						$(this).find('input[type=submit]').attr('disabled', 'disabled');
-					}
-				});
-			}
-
-			disable_submit_buttons_on_default_action();
+			$('form').doublepostpreventer();
 	    });
 	</script>
 
