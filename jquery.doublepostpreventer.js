@@ -1,6 +1,7 @@
 /*
  * jQuery DoublepostPreventer 1.0
  * - Disabling submit buttons after submit
+ * @requires jQuery v1.4 or later
  *
  * Copyright (c) 2011 Niklas Hambuechen (nh2.me)
  * Licensed under the MIT license.
